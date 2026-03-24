@@ -1,0 +1,14 @@
+id,name,author,desc,tags,preview,fn_name,params
+1,Posterize 1bit,rango,posterizes the given image to 1 bit,black_white|posterize,img/jpegs/geometry.jpg,posterize_1bit,[]
+2,Negative,rango,inverts all colors,invert|color,img/jpegs/space.jpg,negative,[]
+3,Glow,rango,adds a soft glow via gaussian blur,blur|glow|light,img/jpegs/flowers.jpg,glow,"[{""name"":""radius"",""default"":14}]"
+4,Color Grain,rango,adds colorful noise grain,grain|noise|color,img/jpegs/desert.jpg,color_grain,[]
+5,RedThreshold,rango,thresholds bright pixels to red,threshold|color|red,img/jpegs/cat.jpg,duotone_threshold,[]
+6,Posterize 3bit,rango,posterizes the image to 8 luma steps,posterize|black_white,img/jpegs/tree.jpg,posterize_3bit,[]
+7,Hue shift,rango,rotates the hue of all pixels,hue|color,img/jpegs/wave.jpg,hue_shift,"[{""name"":""amount"",""default"":22}]"
+8,Brightness Up,rango,increases brightness by 10,brightness|light,img/jpegs/car.jpg,brightness_up,[]
+9,Brightness Down,rango,decreases brightness by 10,brightness|dark,img/jpegs/dice.jpg,brightness_down,[]
+10,Ripple,rango,warps the image with a sine wave distortion,warp|distortion|wave,img/jpegs/wave.jpg,ripple,"[{""name"":""amplitude"",""default"":10},{""name"":""wavelength"",""default"":30}]"
+12,take the red pill,rango,"black hole swirl + channel split + ripple + inverted green + grain + posterize. god help us all.",chaos|warp|distortion|color|grain,img/jpegs/wave.jpg,chaos,[]
+13,GATE OF AZRAEL MUHAHAH,rango,"space inversion + 3 opposing vortexes + chromatic tear + layered ripple + luma hue hallucination + echo feedback + void shadows + electric palette. you will not return the same.",chaos|warp|distortion|color|transcendence,img/jpegs/wave.jpg,gate_of_azrael,[]
+14,Life is Worth Living <3 :3,rango,a gentle reminder that life is beautiful and worth living,inspiration|motivation,img/jpegs/flowers.jpg,life_is_worth_living,[]

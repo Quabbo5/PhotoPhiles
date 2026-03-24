@@ -9,12 +9,14 @@ from community import CommunityClient
 
 _OS = _platform.system()   # "Darwin" | "Windows" | "Linux"
 
+
 from nav_mixin       import NavMixin
 from effects_mixin   import EffectsMixin
 from wiki_mixin      import WikiMixin
 from community_mixin import CommunityMixin
 from profile_mixin   import ProfileMixin
 from workspace_mixin import WorkspaceMixin
+from effect_registry import load_effects
 
 
 class App(NavMixin, WikiMixin, EffectsMixin, CommunityMixin, ProfileMixin, WorkspaceMixin):
@@ -22,8 +24,10 @@ class App(NavMixin, WikiMixin, EffectsMixin, CommunityMixin, ProfileMixin, Works
 
         self.root = Tk()
         self.root.title("PhotoPhile")
-        self.root.geometry("1054x1020")
-        self.root.minsize(1054, 1020)
+        # macos safespace = 1054x1020
+        # windwos safespace = 1080x1020
+        self.root.geometry("900x900")
+        self.root.minsize(900, 900)
         #self.root.state("zoomed")
         self.root.config(bg="black")
 
@@ -179,18 +183,7 @@ class App(NavMixin, WikiMixin, EffectsMixin, CommunityMixin, ProfileMixin, Works
         self.effect_list = Listbox(self.left_panel, font="Plus_Jakarta_Sans 10", bg="#2D2D2D", fg="#f5f5f5", highlightthickness=0, bd=0)
         self.left_panel.add(self.effect_list)
 
-        self.EFFECTS = [
-            {"id": "1", "name": "Posterize 1bit",   "fn": self._posterize_1bit,   "author": "rango", "desc": "posterizes the given image to 1 bit",  "tags": ["black_white", "posterize"], "preview": "img/jpegs/geometry.jpg"},
-            {"id": "2", "name": "Negative",         "fn": self._negative,         "author": "rango", "desc": "inverts all colors",                   "tags": ["invert", "color"],           "preview": "img/jpegs/space.jpg"},
-            {"id": "3", "name": "Glow",             "fn": self._glow,             "author": "rango", "desc": "adds a soft glow via gaussian blur",   "tags": ["blur", "glow", "light"],     "preview": "img/jpegs/flowers.jpg", "params": [{"name": "radius", "default": 14}]},
-            {"id": "4", "name": "Color Grain",      "fn": self._color_grain,      "author": "rango", "desc": "adds colorful noise grain",            "tags": ["grain", "noise", "color"],   "preview": "img/jpegs/desert.jpg"},
-            {"id": "5", "name": "RedThreshold",     "fn": self._duotone_threshold,"author": "rango", "desc": "thresholds bright pixels to red",      "tags": ["threshold", "color", "red"], "preview": "img/jpegs/cat.jpg"},
-            {"id": "6", "name": "Posterize 3bit",   "fn": self._posterize_3bit,   "author": "rango", "desc": "posterizes the image to 8 luma steps", "tags": ["posterize", "black_white"],  "preview": "img/jpegs/tree.jpg"},
-            {"id": "7", "name": "Hue shift",        "fn": self._hue_shift,        "author": "rango", "desc": "rotates the hue of all pixels",        "tags": ["hue", "color"],              "preview": "img/jpegs/wave.jpg",    "params": [{"name": "amount", "default": 22}]},
-            {"id": "8", "name": "Brightness Up",    "fn": self._brightness_up,    "author": "rango", "desc": "increases brightness by 10",           "tags": ["brightness", "light"],       "preview": "img/jpegs/car.jpg"},
-            {"id": "9", "name": "Brightness Down",  "fn": self._brightness_down,  "author": "rango", "desc": "decreases brightness by 10",           "tags": ["brightness", "dark"],        "preview": "img/jpegs/dice.jpg"},
-            {"id": "10","name": "Ripple",           "fn": self._ripple,           "author": "rango", "desc": "warps the image with a sine wave distortion", "tags": ["warp", "distortion", "wave"], "preview": "img/jpegs/wave.jpg", "params": [{"name": "amplitude", "default": 10}, {"name": "wavelength", "default": 30}]},
-        ]
+        self.EFFECTS = load_effects(self)
 
         for e in self.EFFECTS:
             self.effect_list.insert(END, f"{e['id']} – {e['name']}")

@@ -140,7 +140,7 @@ class CommunityMixin:
 
             def _switch(_):
                 mode[0] = "signup" if is_login else "login"
-                _build_form()
+                self.root.after(0, _build_form)
 
             sw.bind("<Button-1>", _switch)
 
